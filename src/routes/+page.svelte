@@ -1,2 +1,24 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+    import DiskRemain from "../atoms/DiskRemain.svelte";
+    import ProgressBox from "../atoms/ProgressBox.svelte";
+    import Tags from "../components/Tags.svelte";
+    import VideoBoxes from "../components/VideoBoxes.svelte";
+    import type { Video } from "$lib/Models";
+
+    const { data } = $props()
+    const videos = data.videos
+    const tags = Array.from(new Set(videos.flatMap(v => v.tags)))
+    let diskRemainText = $state('')
+</script>
+
+<div class="h-screen w-screen">
+    <div class="flex flex-wrap justify-center w-full m-2">
+        <ProgressBox title="Disk Space" description={diskRemainText}>
+            <DiskRemain diskInfo={data.diskInfo} bind:diskRemainText />
+        </ProgressBox>
+    </div>
+    {#if tags}
+        <Tags {tags} />
+    {/if}
+    <VideoBoxes {videos}></VideoBoxes>
+</div>

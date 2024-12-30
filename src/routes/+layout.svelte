@@ -55,14 +55,14 @@
 
 <div class="w-screen h-screen flex flex-col">
 	<header class="flex justify-between items-center py-2 px-6 border-b bg-slate-100 border-gray-300">
-		<a href="/" class="no-underline">
+		<a href="/" class="no-underline" onclick={() => location.href='/'}>
 			<div class="flex gap-x-2 items-center">
 				<img src="/icon.png" alt="logo" width="60" />
 				<span class="text-2xl font-bold text-black">SelfStream</span>
 			</div>
 		</a>
 		<div class="items-center justify-between space-x-4 hidden md:flex">
-			<button class="btn btn-primary" on:click={shuffleVideo}>Shuffle</button>
+			<button class="btn btn-primary" onclick={shuffleVideo}>Shuffle</button>
 			<div class="dropdown">
 				<span class="btn btn-dark dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					Upload

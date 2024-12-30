@@ -5,7 +5,7 @@
     export let video: Video
     const filename = toFilename(video)
     const onclick = async () => {
-        window.open(`/view/${filename}`, '_blank')
+        location.href = `/view/${filename}`, '_blank'
         return
     }
 

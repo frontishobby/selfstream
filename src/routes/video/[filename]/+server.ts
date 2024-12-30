@@ -1,5 +1,6 @@
 import { SEARCH_PATH } from '$env/static/private';
 import { stat } from 'fs/promises';
+import { createReadStream } from 'fs'
 import { resolve } from 'path';
 
 export async function GET({ params, url, request }) {

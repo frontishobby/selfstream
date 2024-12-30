@@ -4,7 +4,7 @@ import { readdir } from 'fs/promises';
 import { SEARCH_PATH } from '$env/static/private';
 import { fromFilename, toFilename } from "$lib/VideoParser";
 import checkDiskSpace from "check-disk-space";
-import { getBirthTime } from "$lib/Birthtime.server";
+import { getBirthTime } from "$lib/BirthTime.server";
 
 const downloading = {}
 
@@ -20,7 +20,7 @@ export const load: Load = async ({ url }) => {
         .filter((video: Video) => !Object.keys(downloading).includes(toFilename(video)))
         .filter((video: Video) => tag === null || video.tags.includes(tag))
     
-    videos.sort((a, b) => getBirthTime(b) - getBirthTime(b))
+    videos.sort((a, b) => getBirthTime(b) - getBirthTime(a))
 
     const diskInfo = await checkDiskSpace(SEARCH_PATH)
 

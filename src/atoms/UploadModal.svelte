@@ -9,8 +9,6 @@
     let tags: string[] = []
     let uploading = false
 
-    $: uploading = fileUploadProgress > 0 && fileUploadProgress < 100
-
     const onClickWrapper = async () => {
         const title = document.getElementById(`titleInput-${modalId}`).value
         if (!title) {
@@ -20,8 +18,10 @@
         }
 
         const filename = `${tags.join('-')}-${title}.mp4`
+        uploading = true
         await clickHandler()(filename)
-        fileUploadProgress = 100
+        uploading = false
+        location.href = '/view/' + filename
     }
 
     const addTag = () => {

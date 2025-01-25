@@ -2,7 +2,7 @@
     import VideoViewBox from "../../../atoms/VideoViewBox.svelte";
     import Tags from "../../../components/Tags.svelte";
     import ThumbnailBox from "../../../atoms/ThumbnailBox.svelte";
-    import {fetchDelete} from "$lib/Fetcher";
+    import {fetchDelete, fetchGet} from "$lib/Fetcher";
     import EditTagModal from "../../../atoms/EditTagModal.svelte"
     import { fromFilename } from "$lib/VideoParser";
     import type { Video } from "$lib/Models";
@@ -19,6 +19,10 @@
 
 </script>
 
+<svelte:head>
+    <title>{video.name} | Selfstream</title>
+</svelte:head>
+
 <div class="w-screen">
     <VideoViewBox {filename}></VideoViewBox>
     <div class="flex flex-col pt-2">
@@ -31,6 +35,9 @@
             </div>
         </div>
         <Tags tags={video.tags} />
+        {#await fetchGet(`/video/${filename}/detail`) then detail}
+            <span class="px-2 text-md font-bold">{(detail.size / 1024 ** 3).toFixed(2)} GB / {new Date(detail.birthTime).toLocaleString()}</span>
+        {/await}
     </div>
     <div class="w-full px-5 flex justify-center">
         <ThumbnailBox filename={filename} thumbnailUrl={thumbnailSrc} />

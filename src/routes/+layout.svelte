@@ -15,10 +15,10 @@
                 try {
                     await axios.request({
                         method: 'POST',
-                        url: "/api/videos", 
+                        url: "/video", 
                         data: formData,
                         headers: {
-                            "Content-Type": "multipart/form-data",
+                            "content-type": "multipart/form-data",
                             'filename': encodeURIComponent(filename)
                         },
                         onUploadProgress: (p) => {
@@ -46,11 +46,6 @@
             }
         }
     }
-    
-    const shuffleVideo = () => {
-        // const target = videos[Math.floor(Math.random()*videos.length)]
-        // push(`/view/${target.filename}`)
-    }
 </script>
 
 <div class="w-screen h-screen flex flex-col">
@@ -62,7 +57,6 @@
 			</div>
 		</a>
 		<div class="items-center justify-between space-x-4 hidden md:flex">
-			<button class="btn btn-primary" onclick={shuffleVideo}>Shuffle</button>
 			<div class="dropdown">
 				<span class="btn btn-dark dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					Upload
@@ -74,7 +68,9 @@
 			</div>
 			<UploadModal modalId="uploadFileModal" modalTitle="Upload from file" fileUploadProgress={uploadProgress} clickHandler={() => fileUpload(document.getElementById('fileInput').files)}>
 				<div class="mb-3">
-					<input class="form-control" type="file" id="fileInput">
+                    <form method="post" enctype="multipart/form-data">
+					    <input class="form-control" type="file" id="fileInput" accept="video/mp4">
+                    </form>
 				</div>
 			</UploadModal>
 			<UploadModal modalId="uploadUrlModal" modalTitle="Upload from url" clickHandler={() => urlUpload(document.getElementById('urlInput').value)}>

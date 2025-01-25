@@ -1,7 +1,8 @@
 import { SEARCH_PATH } from '$env/static/private';
-import { stat } from 'fs/promises';
+import { stat, unlink } from 'fs/promises';
 import { createReadStream } from 'fs'
 import { resolve } from 'path';
+import { json } from '@sveltejs/kit';
 
 export async function GET({ params, url, request }) {
     const videoPath = resolve(`${SEARCH_PATH}/${params.filename}`)
@@ -34,4 +35,10 @@ export async function GET({ params, url, request }) {
         'Content-Type': 'video/mp4',
         },
     });
+}
+
+export async function DELETE({ params }) {
+    const videoPath = resolve(`${SEARCH_PATH}/${params.filename}`)
+    await unlink(videoPath)
+    return json({ success: true })
 }

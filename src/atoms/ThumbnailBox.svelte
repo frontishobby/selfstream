@@ -10,7 +10,7 @@
     const shuffleThumbnail = async () => {
         shuffling = true
         try {
-            await fetchPut(`/videos/${filename}/thumbnail`, {})
+            await fetchPut(`/thumbnail/${filename}`, {})
         } catch (e) {
             alert(`failed to shuffle thumbnail.\n${e}`)
         }

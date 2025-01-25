@@ -1,5 +1,7 @@
 import { SEARCH_PATH } from '$env/static/private';
+import { createThumbnail } from '$lib/Thumbnail.server';
 import { fromFilename } from '$lib/VideoParser';
+import { json } from '@sveltejs/kit';
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';
 
@@ -18,3 +20,10 @@ export async function GET({ params }) {
         return new Response('Image not found', { status: 404 });
     }
 }
+
+export async function PUT({ params }) {
+    const filename = params.filename
+    await createThumbnail(filename)
+    return json({ success: true })
+}
+

@@ -3,6 +3,7 @@ import { SEARCH_PATH } from '$env/static/private';
 import fs from 'fs';
 import http from 'http';
 import ffmpeg from "fluent-ffmpeg";
+import { createThumbnail } from '$lib/Thumbnail.server';
 
 const downloading: Record<string, number> = {}
 
@@ -47,6 +48,7 @@ const downloadFromMissav = (url: string, filename: string) => {
             .on('end', () => {
                 console.log('end...')
                 res(filename)
+                createThumbnail(filename)
             })
             .on('error', (err) => {
                 console.log(err)

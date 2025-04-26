@@ -1,6 +1,5 @@
 import { SEARCH_PATH } from '$env/static/private';
 import { createThumbnail } from '$lib/Thumbnail.server';
-import { fromFilename } from '$lib/VideoParser';
 import { json } from '@sveltejs/kit';
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';

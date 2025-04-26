@@ -21,7 +21,6 @@
         uploading = true
         await clickHandler()(filename)
         uploading = false
-        location.href = '/view/' + filename
     }
 
     const addTag = () => {

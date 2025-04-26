@@ -36,7 +36,7 @@
         return async (filename) => {
             if (videoUrl) {
                 try {
-                    await fetchPost(`/videos/from-url`, { url: videoUrl, filename })
+                    await fetchPost(`/video/from-url`, { url: videoUrl, filename })
                 } catch (e) {
                     alert(`Upload Error\n${e}`)
                 }

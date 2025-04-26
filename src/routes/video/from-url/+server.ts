@@ -4,8 +4,7 @@ import fs from 'fs';
 import http from 'http';
 import ffmpeg from "fluent-ffmpeg";
 import { createThumbnail } from '$lib/Thumbnail.server';
-
-const downloading: Record<string, number> = {}
+import { downloading } from "$lib/Downloading.server";
 
 export async function POST({ request }) {
     let { url, filename }= await request.json()

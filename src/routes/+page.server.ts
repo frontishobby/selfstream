@@ -5,8 +5,7 @@ import { SEARCH_PATH } from '$env/static/private';
 import { fromFilename, toFilename } from "$lib/VideoParser";
 import checkDiskSpace from "check-disk-space";
 import { getBirthTime } from "$lib/BirthTime.server";
-
-const downloading = {}
+import { downloading } from "$lib/Downloading.server";
 
 export const load: Load = async ({ url }) => {
     const data = await readdir(SEARCH_PATH)

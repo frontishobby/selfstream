@@ -46,6 +46,7 @@ const downloadFromMissav = (url: string, filename: string) => {
             .save(filepath)
             .on('end', () => {
                 console.log('end...')
+                delete downloading[filename]
                 res(filename)
                 createThumbnail(filename)
             })

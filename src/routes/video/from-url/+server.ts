@@ -36,13 +36,14 @@ export async function POST({ request }) {
 }
 
 const downloadFromMissav = (url: string, filename: string) => {
+    url = url.trim()
     console.log('download start.')
     return new Promise(res => {
         const filepath = `${SEARCH_PATH}/${filename}`
         let duration: number;
         ffmpeg(url)
             .outputOptions('-c copy')
-            .addInputOptions(`-headers origin:https://missav.com`)
+            .addInputOptions(`-headers referer:https://missav.ai`)
             .save(filepath)
             .on('end', () => {
                 console.log('end...')
@@ -55,13 +56,13 @@ const downloadFromMissav = (url: string, filename: string) => {
                 console.log(`${filename} download failed`)
                 fs.unlinkSync(filepath)
             })
-            .on('progress', progress => {
-                const progressedDuration = convertToSeconds(progress.timemark)
-                downloading[filename] = (progressedDuration / duration) * 100
-            })
-            .ffprobe((err, metadata) => {
-                duration = metadata.format.duration as number
-            })
+            // .on('progress', progress => {
+            //     const progressedDuration = convertToSeconds(progress.timemark)
+            //     downloading[filename] = (progressedDuration / duration) * 100
+            // })
+            // .ffprobe((err, metadata) => {
+            //     duration = metadata.format.duration as number
+            // })
     })
 }
 
